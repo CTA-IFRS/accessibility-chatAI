@@ -1,4 +1,3 @@
-// ==========================================
 const botroot = document.getElementById('botroot');
 const input = document.getElementById('pergunta');
 const form = document.getElementById('form');
@@ -35,9 +34,7 @@ const frases = [
     "Selecione um tópico ou digite sua dúvida para começarmos.",
 ];
 
-// ==========================================
-// 2. FUNÇÕES UTILITÁRIAS E INTERFACE
-// ==========================================
+
 function msg() {
     if (initText) {
         initText.innerText = frases[Math.floor(Math.random() * frases.length)];
@@ -157,9 +154,7 @@ function adicionarMensagem(texto, tipo, id = null) {
     return div;
 }
 
-// ==========================================
-// 3. REQUISIÇÕES HTTP / API
-// ==========================================
+
 async function enviar() {
     if (initText) initText.style.display = 'none';
     const mensagem = input.value.trim();
@@ -430,7 +425,7 @@ async function carregar() {
             itemConversa.innerHTML = `
         <div class="conversa" data-id="${c._id || c.id}" data-titulo="${c.titulo.replace(/"/g, '&quot;')}">
             <div class="title">
-                ${c.titulo.length <= 13 ? c.titulo : c.titulo.slice(0, 13) + "..."}
+                ${c.titulo.length <= 17 ? c.titulo : c.titulo.slice(0, 17) + "..."}
             </div>
         </div>
         <div class="opcoes">
@@ -449,9 +444,6 @@ async function carregar() {
     }
 }
 
-// ==========================================
-// 4. MODAIS (DELETAR E EDITAR CONVERSAS)
-// ==========================================
 function deleteConversa(id) {
     const div = document.createElement('div');
     div.innerHTML = `
@@ -563,9 +555,6 @@ async function editConversa(id) {
     });
 }
 
-// ==========================================
-// 5. EVENT LISTENERS & INICIALIZAÇÃO
-// ==========================================
 send.addEventListener('click', () => {
     if (isGenerating) {
         stop();
@@ -617,6 +606,10 @@ document.addEventListener('click', async (e) => {
     if (!chat) return;
 
     navigate(chat.dataset.id);
+
+    if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+    }
 });
 
 const menuBtn = document.getElementById('menu-mobile');
@@ -635,6 +628,5 @@ input.addEventListener('input', function () {
     }
 })
 
-// Inicialização da aplicação
 msg();
 carregar();

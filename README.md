@@ -40,6 +40,7 @@
 
         11- Memória avançada para a IA, fazendo ela se lembrar do usuário e ter comportamento personalizado.
 
+        12- confirmação de deletar conta
 
 
 //revisão da IA sobre o código:
